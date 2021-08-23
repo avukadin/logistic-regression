@@ -36,12 +36,11 @@ export default class LogisticRegression {
     for (let i = 0; i < this.numberClasses; i++) {
       this.classifiers[i] = new LogisticRegressionTwoClasses({
         numSteps: this.numSteps,
-        learningRate: this.learningRate,
-        callbackFunction:callbackFunction
+        learningRate: this.learningRate        
       });
       let y = Y.clone();
       y = transformClassesForOneVsAll(y, i);
-      this.classifiers[i].train(X, y);
+      this.classifiers[i].train(X, y, callbackFunction);
     }
   }
 
