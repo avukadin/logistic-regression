@@ -28,7 +28,7 @@ export default class LogisticRegression {
     this.numberClasses = numberClasses;
   }
 
-  train(X, Y) {
+  train(X, Y, callbackFunction) {
     this.numberClasses = new Set(Y.to1DArray()).size;
     this.classifiers = new Array(this.numberClasses);
 
@@ -37,6 +37,7 @@ export default class LogisticRegression {
       this.classifiers[i] = new LogisticRegressionTwoClasses({
         numSteps: this.numSteps,
         learningRate: this.learningRate,
+        callbackFunction:callbackFunction
       });
       let y = Y.clone();
       y = transformClassesForOneVsAll(y, i);

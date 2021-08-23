@@ -8,10 +8,11 @@ export default class LogisticRegressionTwoClasses {
     this.weights = weights ? Matrix.checkMatrix(weights) : null;
   }
 
-  train(features, target) {
+  train(features, target, callbackFunction) {
     let weights = Matrix.zeros(1, features.columns);
 
     for (let step = 0; step < this.numSteps; step++) {
+      callbackFunction({progress:(step+1)/this.numSteps, trainState:"training"});
       const scores = features.mmul(weights.transpose());
       const predictions = sigmoid(scores);
 
